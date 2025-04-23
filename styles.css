@@ -15,7 +15,7 @@ body {
     background-color: lightblue;
 }
 
-.main {
+.book-shelf {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-auto-rows: max-content;

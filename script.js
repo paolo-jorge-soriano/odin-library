@@ -1,4 +1,5 @@
 const myLibrary = [];
+const bookShelf = document.querySelector(".book-shelf");
 
 function Book(title, author, pages, isRead) {
     this.id = crypto.randomUUID();
@@ -6,9 +7,6 @@ function Book(title, author, pages, isRead) {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-    // this.info = function() {
-    // 	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
-    // };
 }
 
 function addBookToLibrary(bookObj) {
@@ -16,9 +14,14 @@ function addBookToLibrary(bookObj) {
 }
 
 function displayLibraryBooks() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        console.log(myLibrary[i]);
-    }
+    bookShelf.innerHTML += myLibrary.map((book) => 
+        `<div class="book-card">
+            <p>${book.title}</p>
+            <p>${book.author}</p>
+            <p>${book.pages}</p>
+            <p>${book.isRead}</p>
+        </div>`
+    ).join("")
 }
 
 theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
