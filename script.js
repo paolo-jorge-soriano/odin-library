@@ -1,9 +1,8 @@
 const myLibrary = [];
 const bookShelf = document.querySelector(".book-shelf");
 const modalContainer = document.querySelector(".modal-container");
-console.log(modalContainer);
 const btnShowModal = document.getElementById("btn-show-modal");
-console.log(btnShowModal);
+const btnSubmit = document.getElementById("btn-submit");
 const btnCancel = document.getElementById("btn-cancel");
 
 function Book(title, author, pages, isRead) {
@@ -14,12 +13,28 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
 }
 
+function getBookInfo() {
+    const title = document.getElementById("title");
+    const author = document.getElementById("author");
+    const pages = document.getElementById("pages");
+    const isRead = document.getElementById("isRead");
+
+    let newBook = new Book(title.value, author.value, pages.value, isRead.checked);
+
+    addBookToLibrary(newBook);
+
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    isRead.checked = false;
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
 function displayLibraryBooks() {
-    bookShelf.innerHTML += myLibrary.map((book) => 
+    bookShelf.innerHTML = myLibrary.map((book) => 
         `<div class="book-card">
             <p>${book.title}</p>
             <p>${book.author}</p>
@@ -30,8 +45,6 @@ function displayLibraryBooks() {
 }
 
 btnShowModal.addEventListener("click", () => {
-    alert("test");
-    console.log("test");
     modalContainer.showModal();
 });
 
@@ -40,9 +53,16 @@ btnCancel.addEventListener("click", (e) => {
     modalContainer.close();
 });
 
+btnSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    getBookInfo();
+    displayLibraryBooks();
+    modalContainer.close();
+});
+
 // Dummy data
-theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-theFlash = new Book("The Flash", "DC Comics", 20, false);
+let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+let theFlash = new Book("The Flash", "DC Comics", 20, false);
 
 addBookToLibrary(theHobbit);
 addBookToLibrary(theFlash);
