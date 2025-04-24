@@ -31,24 +31,41 @@ function addBookToLibrary(book) {
 
 function deleteBook(library, id) {
     const bookIndex = library.findIndex((book) => book.id === id);
+    console.log(bookIndex);
     library.splice(bookIndex, 1);
+}
+
+function changeReadStatus(library, id) {
+    const bookIndex = library.findIndex((book) => book.id === id);
+
+    library[bookIndex].isRead = !library[bookIndex].isRead;
+    console.log(bookIndex);
 }
 
 function displayLibraryBooks() {
     bookShelf.innerHTML = myLibrary.map((book) => 
         `<div class="book-card" data-id="${book.id}">
-            <p>${book.title}</p>
-            <p>${book.author}</p>
-            <p>${book.pages}</p>
+            <button class="btn-delete" type="button">X</button>
+            <h1>${book.title}</h1>
+            <h3>${book.author}</h3>
+            <p>${book.pages} pages</p>
             <p>${book.isRead ? `Read`:`Not Read`}</p>
-            <button class="btn-delete" type="button">Delete</button>
+            <button class="btn-read" type="button">Toggle Read Status</button>
         </div>`
     ).join("")
+
+    const btnRead = document.querySelectorAll(".btn-read");
+    btnRead.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            changeReadStatus(myLibrary, btn.parentElement.getAttribute("data-id"));
+            displayLibraryBooks();
+        });
+    });
 
     const btnDelete = document.querySelectorAll(".btn-delete");
     btnDelete.forEach((btn) => {
         btn.addEventListener("click", () => {
-            deleteBook(myLibrary, btn.id);
+            deleteBook(myLibrary, btn.parentElement.getAttribute("data-id"));
             displayLibraryBooks();
         });
     });

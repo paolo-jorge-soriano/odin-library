@@ -18,7 +18,7 @@
             <main class="main">
 
                 <div class="add-book">
-                    <button type="button" id="btn-show-modal">+ Add book</button>
+                    <button type="button" id="btn-show-modal" class="btn-show-modal">+ Add book</button>
                     <dialog class="modal-container">
                         <form action="" class="modal-form" method="dialog">
                             <label for="title">Title:</label>
@@ -27,11 +27,13 @@
                             <input type="text" name="author" id="author" required autocomplete="off">
                             <label for="pages">Number of Pages:</label>
                             <input type="number" name="pages" id="pages" required>
-                            <label for="isRead">Have you read this book?</label>
-                            <input type="checkbox" name="isRead" id="isRead">
                             <div>
-                                <button type="submit" id="btn-submit">Add book</button>
-                                <button type="button" id="btn-cancel">Cancel</button>
+                                <label for="isRead">Have you read this book?</label>
+                                <input type="checkbox" name="isRead" id="isRead">
+                            </div>
+                            <div class="modal-buttons">
+                                <button type="submit" id="btn-submit" class="btn-submit">Add book</button>
+                                <button type="button" id="btn-cancel" class="btn-cancel">Cancel</button>
                             </div>
                         </form>
                     </dialog>
